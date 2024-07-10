@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MongoDB Connection URI und Datenbankname
-const uri = process.env.MONGODB_URI;
+const uri = "mongodb+srv://johan246:TID0tFov2Y3GZoz6@braunstein.oxtmnmo.mongodb.net/test?retryWrites=true&w=majority&appName=Braunstein";
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
